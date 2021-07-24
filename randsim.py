@@ -68,10 +68,6 @@ class SimsMtRand():
         if self.index1 < 0:
             self.m_seedRand(self.seed)
 
-            self.stateVector[0] = self.seed | 1
-            for i in range(1, self.STATE_VECTOR_LENGTH):
-                self.stateVector[i] = (self.stateVector[i-1] * 69069) & 0xFFFFFFFF
-
             for i in range(0, self.STATE_VECTOR_LENGTH - self.STATE_VECTOR_M):
                 y = (self.stateVector[i] & self.UPPER_MASK) | (self.stateVector[i+1] & self.LOWER_MASK)
                 self.stateVector[i] = self.stateVector[i+self.STATE_VECTOR_M] ^ (y >> 1) ^ self.mag[y & 0x1]
